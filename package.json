@@ -1,0 +1,74 @@
+{
+  "name": "microbuild",
+  "version": "0.0.0",
+  "description": "A library build setup using microbundler and jest",
+  "keywords": [
+    "microbundle",
+    "jest",
+    "build system",
+    "library",
+    "bundler"
+  ],
+  "files": [
+    "./dist"
+  ],
+  "main": "dist/index.js",
+  "umd:main": "dist/index.umd.js",
+  "module": "dist/index.mjs",
+  "typings": "./dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "Skulptur <skulptur.dev@gmail.com>",
+  "license": "MIT",
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "scripts": {
+    "build": "microbundle",
+    "format:fix": "npm run format -- --write",
+    "format": "prettier \"**/*.{ts,tsx,js,jsx,css,scss,sass,less,md}\"",
+    "lint:fix": "npm run lint -- --fix",
+    "lint": "tslint --project tsconfig.json --format codeFrame",
+    "prepublish": "npm run build",
+    "start": "microbundle watch",
+    "test:ci": "npm t -- --ci",
+    "test:coverage": "npm t -- --coverage",
+    "test:watch": "npm t -- --watchAll",
+    "test": "jest -c ./config/jest.config.js"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.{ts,tsx,js,jsx,css,scss,sass,less,md}": [
+      "prettier --write",
+      "git add"
+    ],
+    "src/**/*.{ts,tsx}": [
+      "npm run lint:fix",
+      "git add"
+    ]
+  },
+  "peerDependencies": {},
+  "dependencies": {},
+  "devDependencies": {
+    "@types/jest": "24.0.11",
+    "husky": "1.3.0",
+    "jest-watch-typeahead": "0.2.0",
+    "jest": "24.5.0",
+    "lint-staged": "8.1.0",
+    "microbundle": "false0.11.0",
+    "prettier": "1.16.4",
+    "ts-jest": "24.0.0",
+    "tslib": "1.9.3",
+    "tslint-config-prettier": "1.17.0",
+    "tslint-config-standard": "8.0.1",
+    "tslint-etc": "1.2.12",
+    "tslint": "5.12.0",
+    "typescript-tslint-plugin": "0.2.1"
+  }
+}
