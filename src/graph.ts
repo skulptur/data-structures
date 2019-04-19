@@ -1,8 +1,8 @@
 export type NodeKey = number | string
 
 export interface GraphNode {
-  key: NodeKey
-  children: GraphNode[]
+  readonly key: NodeKey
+  readonly children: GraphNode[]
   addChild: (node: GraphNode) => void
 }
 
@@ -20,8 +20,12 @@ export function createNode(key: NodeKey): GraphNode {
   const children: GraphNode[] = []
 
   return {
-    key,
-    children,
+    get key() {
+      return key
+    },
+    get children() {
+      return children
+    },
     addChild(node: GraphNode) {
       children.push(node)
     },
