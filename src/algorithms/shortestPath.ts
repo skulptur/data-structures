@@ -25,6 +25,31 @@ function initializePriorityQueue(graph: Graph) {
   return queue
 }
 
+function priorityQueueEmpty(queue: any) {
+  return Object.keys(queue).length === 0
+}
+
+// Linear search to extract (find and remove) min from q.
+function extractMin(queue: any, d: any): NodeKey | null {
+  let min = Infinity
+  let minNode
+  Object.keys(queue).forEach((node) => {
+    if (d[node] < min) {
+      min = d[node]
+      minNode = node
+    }
+  })
+
+  // tslint:disable-next-line
+  if (minNode === undefined) {
+    // If we reach here, there's a disconnected subgraph, and we're done.
+    return null
+  }
+  delete queue[minNode]
+
+  return minNode
+}
+
 export function shortestPath(source: NodeKey, destination: NodeKey, graph: Graph) {
   const error = !graph.getNode(source)
     ? 'Source node is not in the graph.'
@@ -36,57 +61,31 @@ export function shortestPath(source: NodeKey, destination: NodeKey, graph: Graph
     throw new Error(error)
   }
 
-  // Upper bounds for shortest path weights from source.
-  const d: any = initializeSingleSource(source, graph)
-
   // Predecessors.
   const predecessors: any = {}
 
-  // Poor man's priority queue, keyed on d.
-  let queue: any = initializePriorityQueue(graph)
-
-  // Returns true if q is empty.
-  function priorityQueueEmpty() {
-    return Object.keys(queue).length === 0
-  }
-
-  // Linear search to extract (find and remove) min from q.
-  function extractMin(): NodeKey | null {
-    let min = Infinity
-    let minNode
-    Object.keys(queue).forEach((node) => {
-      if (d[node] < min) {
-        min = d[node]
-        minNode = node
-      }
-    })
-
-    // tslint:disable-next-line
-    if (minNode === undefined) {
-      // If we reach here, there's a disconnected subgraph, and we're done.
-      queue = {}
-
-      return null
-    }
-    delete queue[minNode]
-
-    return minNode
-  }
-
-  function relax(u: NodeKey, v: NodeKey) {
-    // var w = getEdgeWeight(u, v)
-    const w = 1
-    if (d[v] > d[u] + w) {
-      d[v] = d[u] + w
-      predecessors[v] = u
-    }
-  }
-
   function dijkstra() {
-    while (!priorityQueueEmpty()) {
-      const u = extractMin()
+    // Upper bounds for shortest path weights from source.
+    const d: any = initializeSingleSource(source, graph)
+    // Poor man's priority queue, keyed on d.
+    let queue: any = initializePriorityQueue(graph)
 
-      if (u === null) return
+    function relax(u: NodeKey, v: NodeKey) {
+      // var w = getEdgeWeight(u, v)
+      const w = 1
+      if (d[v] > d[u] + w) {
+        d[v] = d[u] + w
+        predecessors[v] = u
+      }
+    }
+
+    while (!priorityQueueEmpty(queue)) {
+      const u = extractMin(queue, d)
+
+      if (u === null) {
+        queue = {}
+        break
+      }
 
       const node = graph.getNode(u)
 
