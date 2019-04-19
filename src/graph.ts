@@ -1,7 +1,9 @@
 import { createQueue } from './queue'
 
+type NodeKey = number | string
+
 export interface GraphNode {
-  key: string
+  key: NodeKey
   children: GraphNode[]
   addChild: (node: GraphNode) => void
 }
@@ -10,15 +12,15 @@ export interface Graph {
   directed: boolean
   nodes: GraphNode[]
   edges: string[]
-  addNode: (key: string) => void
-  getNode: (key: string) => GraphNode | undefined
-  addEdge: (node1Key: string, node2Key: string) => boolean
+  addNode: (key: NodeKey) => void
+  getNode: (key: NodeKey) => GraphNode | undefined
+  addEdge: (node1Key: NodeKey, node2Key: NodeKey) => boolean
   print: () => void
-  bfs: (startingNodeKey: string, visitFn: (node: GraphNode) => void) => void
-  dfs: (startingNodeKey: string, visitFn: (node: GraphNode) => void) => void
+  bfs: (startingNodeKey: NodeKey, visitFn: (node: GraphNode) => void) => void
+  dfs: (startingNodeKey: NodeKey, visitFn: (node: GraphNode) => void) => void
 }
 
-export function createNode(key: string): GraphNode {
+export function createNode(key: NodeKey): GraphNode {
   const children: GraphNode[] = []
 
   return {
@@ -133,24 +135,3 @@ export function createGraph(directed = false): Graph {
     },
   }
 }
-
-// const graph = createGraph(true)
-
-// graph.addNode('Kyle')
-// graph.addNode('Anna')
-// graph.addNode('Krios')
-// graph.addNode('Tali')
-
-// graph.addEdge('Kyle', 'Anna')
-// graph.addEdge('Anna', 'Kyle')
-// graph.addEdge('Kyle', 'Krios')
-// graph.addEdge('Kyle', 'Tali')
-// graph.addEdge('Anna', 'Krios')
-// graph.addEdge('Anna', 'Tali')
-// graph.addEdge('Krios', 'Anna')
-// graph.addEdge('Tali', 'Kyle')
-
-// console.log(graph.print())
-
-// exports.createNode = createNode
-// exports.createGraph = createGraph
