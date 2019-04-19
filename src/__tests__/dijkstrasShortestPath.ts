@@ -36,13 +36,13 @@ describe("Dijkstra's Shortest Path Algorithm", () => {
     expect(() => shortestPath('a', 'c', graph)).toThrow()
   })
 
-  it('Throws error if no path exists.', () => {
+  it('Returns null if no path exists.', () => {
     const graph = createGraph()
-    const nodes = ['a', 'b', 'c', 'd']
+    const nodes = ['a', 'b', 'c', 'd', 'e']
     nodes.forEach(graph.addNode)
     ;[['a', 'b'], ['d', 'e']].forEach((edge) => graph.addEdge(edge[0], edge[1]))
 
-    expect(() => shortestPath('a', 'e', graph)).toThrow()
+    expect(shortestPath('a', 'e', graph)).toBe(null)
   })
 
   it('Works with disconnected subgraphs.', () => {

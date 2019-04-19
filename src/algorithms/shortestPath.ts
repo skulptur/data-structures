@@ -87,9 +87,14 @@ function dijkstra(source: NodeKey, graph: Graph) {
   return predecessors
 }
 
+interface Path {
+  weight: number
+  path: NodeKey[]
+}
+
 // Assembles the shortest path by traversing the
 // predecessor subgraph from destination to source.
-function path(source: NodeKey, destination: NodeKey, predecessors: any) {
+function path(source: NodeKey, destination: NodeKey, predecessors: any): Path | null {
   const nodeList = []
   let weight = 0
   let node = destination
@@ -99,9 +104,11 @@ function path(source: NodeKey, destination: NodeKey, predecessors: any) {
     weight += 1
     node = predecessors[node]
   }
+
   if (node !== source) {
-    throw new Error('No path found')
+    return null
   }
+
   nodeList.push(node)
   nodeList.reverse()
 
