@@ -14,7 +14,6 @@ export interface Graph {
   getNode: (key: NodeKey) => GraphNode | undefined
   addEdge: (node1Key: NodeKey, node2Key: NodeKey) => boolean
   print: () => void
-  dfs: (startingNodeKey: NodeKey, visitFn: (node: GraphNode) => void) => void
 }
 
 export function createNode(key: NodeKey): GraphNode {
@@ -75,30 +74,6 @@ export function createGraph(directed = false): Graph {
           return result
         })
         .join('\n')
-    },
-
-    dfs(startingNodeKey, visitFn) {
-      const startingNode = this.getNode(startingNodeKey)
-
-      if (!startingNode) return
-
-      const visitedHash = nodes.reduce((acc: any, cur) => {
-        acc[cur.key] = false
-        return acc
-      }, {})
-
-      function explore(node: GraphNode) {
-        if (visitedHash[node.key]) return
-
-        visitFn(node)
-        visitedHash[node.key] = true
-
-        node.children.forEach((child) => {
-          explore(child)
-        })
-      }
-
-      explore(startingNode)
     },
   }
 }

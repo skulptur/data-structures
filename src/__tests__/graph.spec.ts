@@ -1,5 +1,6 @@
 import { createGraph, createNode, Graph, GraphNode } from '../graph'
 import { breadthFirstSearch } from '../algorithms/breadthFirstSearch'
+import { depthFirstSearch } from '../algorithms/depthFirstSearch'
 
 describe('Node', () => {
   let node: GraphNode
@@ -151,7 +152,7 @@ e`
     })
   })
 
-  test('bfs', () => {
+  test('breadth-first search', () => {
     const nodes = ['a', 'b', 'c', 'd', 'e']
     nodes.forEach((node) => {
       graph.addNode(node)
@@ -173,7 +174,7 @@ e`
     expect(result).toEqual('a => b => c => e => d')
   })
 
-  test('dfs', () => {
+  test('depth-first search', () => {
     const nodes = ['a', 'b', 'c', 'd', 'e']
     nodes.forEach((node) => {
       graph.addNode(node)
@@ -190,7 +191,7 @@ e`
       result += result.length === 0 ? node.key : ` => ${node.key}`
     }
 
-    graph.dfs('a', visit)
+    depthFirstSearch('a', visit, graph)
 
     expect(result).toEqual('a => b => d => c => e')
   })
