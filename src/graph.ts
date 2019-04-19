@@ -1,6 +1,6 @@
 import { createQueue } from './queue'
 
-type NodeKey = number | string
+export type NodeKey = number | string
 
 export interface GraphNode {
   key: NodeKey
@@ -16,7 +16,6 @@ export interface Graph {
   getNode: (key: NodeKey) => GraphNode | undefined
   addEdge: (node1Key: NodeKey, node2Key: NodeKey) => boolean
   print: () => void
-  bfs: (startingNodeKey: NodeKey, visitFn: (node: GraphNode) => void) => void
   dfs: (startingNodeKey: NodeKey, visitFn: (node: GraphNode) => void) => void
 }
 
@@ -78,36 +77,6 @@ export function createGraph(directed = false): Graph {
           return result
         })
         .join('\n')
-    },
-
-    bfs(startingNodeKey, visitFn) {
-      const startingNode = this.getNode(startingNodeKey)
-
-      if (!startingNode) return
-
-      const visitedHash = nodes.reduce((acc: any, cur) => {
-        acc[cur.key] = false
-        return acc
-      }, {})
-
-      const queue = createQueue<GraphNode>()
-      queue.enqueue(startingNode)
-
-      while (queue.length) {
-        const currentNode = queue.dequeue()
-        if (!currentNode) break
-
-        if (!visitedHash[currentNode.key]) {
-          visitFn(currentNode)
-          visitedHash[currentNode.key] = true
-        }
-
-        currentNode.children.forEach((node) => {
-          if (!visitedHash[node.key]) {
-            queue.enqueue(node)
-          }
-        })
-      }
     },
 
     dfs(startingNodeKey, visitFn) {

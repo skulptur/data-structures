@@ -1,4 +1,5 @@
 import { createGraph, createNode, Graph, GraphNode } from '../graph'
+import { breadthFirstSearch } from '../algorithms/breadthFirstSearch'
 
 describe('Node', () => {
   let node: GraphNode
@@ -167,7 +168,7 @@ e`
       result += result.length === 0 ? node.key : ` => ${node.key}`
     }
 
-    graph.bfs('a', visit)
+    breadthFirstSearch('a', visit, graph)
 
     expect(result).toEqual('a => b => c => e => d')
   })
