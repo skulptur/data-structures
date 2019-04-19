@@ -1,5 +1,3 @@
-import { createQueue } from './queue'
-
 export type NodeKey = number | string
 
 export interface GraphNode {
