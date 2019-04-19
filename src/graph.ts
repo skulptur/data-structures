@@ -7,9 +7,9 @@ export interface GraphNode {
 }
 
 export interface Graph {
-  directed: boolean
-  nodes: GraphNode[]
-  edges: string[]
+  readonly isDirected: boolean
+  readonly nodes: GraphNode[]
+  readonly edges: string[]
   addNode: (key: NodeKey) => void
   getNode: (key: NodeKey) => GraphNode | undefined
   addEdge: (node1Key: NodeKey, node2Key: NodeKey) => boolean
@@ -33,9 +33,17 @@ export function createGraph(directed = false): Graph {
   const edges: string[] = []
 
   return {
-    directed,
-    nodes,
-    edges,
+    get isDirected() {
+      return directed
+    },
+
+    get edges() {
+      return edges
+    },
+
+    get nodes() {
+      return nodes
+    },
 
     addNode(key) {
       nodes.push(createNode(key))

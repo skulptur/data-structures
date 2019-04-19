@@ -41,10 +41,10 @@ describe('Graph', () => {
   })
 
   test('directed', () => {
-    expect(graph.directed).toBe(false)
+    expect(graph.isDirected).toBe(false)
 
     graph = createGraph(true)
-    expect(graph.directed).toBe(true)
+    expect(graph.isDirected).toBe(true)
   })
 
   test('addNode', () => {
