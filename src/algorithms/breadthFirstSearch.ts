@@ -12,6 +12,7 @@ export function breadthFirstSearch(
 
   const visitedHash = graph.nodes.reduce((acc: any, cur) => {
     acc[cur.key] = false
+
     return acc
   }, {})
 

@@ -11,6 +11,7 @@ export function depthFirstSearch(
 
   const visitedHash = graph.nodes.reduce((acc: any, cur) => {
     acc[cur.key] = false
+
     return acc
   }, {})
 
