@@ -40,11 +40,10 @@ function extractMin(queue: any, d: any): NodeKey | null {
     }
   })
 
+  // Disconnected subgraph,  we're done.
   // tslint:disable-next-line
-  if (minNode === undefined) {
-    // If we reach here, there's a disconnected subgraph, and we're done.
-    return null
-  }
+  if (minNode === undefined) return null
+
   delete queue[minNode]
 
   return minNode
@@ -55,21 +54,21 @@ function dijkstra(source: NodeKey, graph: Graph) {
   const predecessors: any = {}
 
   // Upper bounds for shortest path weights from source.
-  const d: any = initializeSingleSource(source, graph)
+  const weightsFromSource: any = initializeSingleSource(source, graph)
   // Poor man's priority queue, keyed on d.
   let queue: any = initializePriorityQueue(graph)
 
   function relax(u: NodeKey, v: NodeKey) {
     // var w = getEdgeWeight(u, v)
     const w = 1
-    if (d[v] > d[u] + w) {
-      d[v] = d[u] + w
+    if (weightsFromSource[v] > weightsFromSource[u] + w) {
+      weightsFromSource[v] = weightsFromSource[u] + w
       predecessors[v] = u
     }
   }
 
   while (!priorityQueueEmpty(queue)) {
-    const u = extractMin(queue, d)
+    const u = extractMin(queue, weightsFromSource)
 
     if (u === null) {
       queue = {}
