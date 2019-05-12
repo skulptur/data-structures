@@ -45,9 +45,7 @@
     "no-shadowed-variable": false,
     "no-require-imports": true,
     "no-boolean-literal-compare": true,
-    "no-invalid-this": {
-      "options": "check-function-in-method"
-    },
+
     "no-invalid-template-strings": true,
     "ordered-imports": false,
     "member-ordering": false,
