@@ -1,4 +1,5 @@
-import { Graph, NodeKey } from '../graph'
+import { Graph } from '../structures/graph'
+import { NodeKey } from '../interfaces'
 
 function initializeSingleSource(source: NodeKey, graph: Graph) {
   const d = graph.nodes.reduce(

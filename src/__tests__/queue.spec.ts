@@ -1,4 +1,4 @@
-import { createQueue, Queue } from '../queue'
+import { createQueue, Queue } from '../structures/queue'
 
 describe('Queue', () => {
   let queue: Queue<number>

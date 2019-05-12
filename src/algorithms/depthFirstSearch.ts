@@ -1,4 +1,5 @@
-import { Graph, GraphNode, NodeKey } from '../graph'
+import { Graph, GraphNode } from '../structures/graph'
+import { NodeKey } from '../interfaces'
 
 export function depthFirstSearch(
   startingNodeKey: NodeKey,

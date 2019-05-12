@@ -1,4 +1,4 @@
-import { createGraph, createNode, Graph, GraphNode } from '../graph'
+import { createGraph, createNode, Graph, GraphNode } from '../structures/graph'
 import { breadthFirstSearch } from '../algorithms/breadthFirstSearch'
 import { depthFirstSearch } from '../algorithms/depthFirstSearch'
 

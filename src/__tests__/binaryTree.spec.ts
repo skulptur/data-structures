@@ -3,7 +3,7 @@ import {
   createBinaryTree,
   postOrderTraversal,
   preOrderTraversal,
-} from '../binaryTree'
+} from '../structures/binaryTree'
 
 describe('BinaryNode', () => {
   let node: any

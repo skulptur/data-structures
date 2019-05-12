@@ -1,5 +1,6 @@
-import { Graph, GraphNode, NodeKey } from '../graph'
-import { createQueue } from '../queue'
+import { Graph, GraphNode } from '../structures/graph'
+import { NodeKey } from '../interfaces'
+import { createQueue } from '../structures/queue'
 
 export function breadthFirstSearch(
   startingNodeKey: NodeKey,

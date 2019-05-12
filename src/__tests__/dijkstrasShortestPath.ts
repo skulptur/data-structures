@@ -1,5 +1,5 @@
 import { shortestPath } from '../algorithms/shortestPath'
-import { createGraph } from '../graph'
+import { createGraph } from '../structures/graph'
 
 describe("Dijkstra's Shortest Path Algorithm", () => {
   it('Should compute shortest path on a single edge.', () => {

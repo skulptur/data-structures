@@ -1,4 +1,4 @@
-import { createTree, createNode, TreeNode } from '../tree'
+import { createTree, createNode, TreeNode } from '../structures/tree'
 
 describe('Node', () => {
   let node: TreeNode

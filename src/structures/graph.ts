@@ -1,4 +1,4 @@
-export type NodeKey = number | string
+import { NodeKey } from '../interfaces'
 
 export interface GraphNode {
   readonly key: NodeKey

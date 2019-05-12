@@ -35,6 +35,7 @@ export function createLinkedList<T>(): LinkedList<T> {
         this.head = node
         this.tail = node
         this.length++
+
         return node
       }
 
@@ -58,6 +59,7 @@ export function createLinkedList<T>(): LinkedList<T> {
         this.head = null
         this.tail = null
         this.length--
+
         return node
       }
 

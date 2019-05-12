@@ -1,4 +1,4 @@
-import { createPriorityQueue, PriorityQueue } from '../priorityQueue'
+import { createPriorityQueue, PriorityQueue } from '../structures/priorityQueue'
 
 describe('Priority Queue', () => {
   let queue: PriorityQueue<string>

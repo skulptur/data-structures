@@ -1,4 +1,4 @@
-import { createLinkedList, createNode, LinkedList, LinkedListNode } from '../linkedList'
+import { createLinkedList, createNode, LinkedList, LinkedListNode } from '../structures/linkedList'
 
 describe('Node', () => {
   let node: LinkedListNode<string>
@@ -41,7 +41,7 @@ describe('Linked List', () => {
   })
 
   test('push', () => {
-    const a = linkedList.push('a')
+    linkedList.push('a')
     expect(linkedList.head && linkedList.head.value).toEqual('a')
     expect(linkedList.tail && linkedList.tail.value).toEqual('a')
     expect(linkedList.length).toEqual(1)
@@ -69,7 +69,7 @@ describe('Linked List', () => {
 
     // List of length < 1
     const values = ['a', 'b', 'c', 'd', 'e']
-    const nodes = values.map((val) => linkedList.push(val))
+    values.map((val) => linkedList.push(val))
     const popped = linkedList.pop()
     expect(popped && popped.value).toEqual('e')
     expect(linkedList.tail && linkedList.tail.value).toEqual('d')
